@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="gOFfAr" name="generateqrcode" projectType="guiapp" useAppConfig="1"
+              addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1">
+  <MAINGROUP id="XeNIOC" name="generateqrcode">
+    <GROUP id="{84073C36-83A8-FF46-58E9-F937484D28EC}" name="Resources">
+      <FILE id="hd3mP3" name="calculaTest" compile="0" resource="1" file="../../Users/vitor/Downloads/calculaTest"/>
+    </GROUP>
+    <GROUP id="{7DD1B24B-D2BF-41BA-7245-AB60339A021A}" name="AuxLib">
+      <FILE id="HwInnk" name="qrcodegen.cpp" compile="1" resource="0" file="Source/qrcodegen.cpp"/>
+      <FILE id="DzLoBX" name="qrcodegen.h" compile="0" resource="0" file="Source/qrcodegen.h"/>
+    </GROUP>
+    <GROUP id="{4282CC15-4D03-9C06-41B1-051353026BB3}" name="Source">
+      <FILE id="SO6ttt" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="eotQmW" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="QJ1vXZ" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="generateqrcode"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="generateqrcode"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../Juce/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../Juce/modules"/>
+        <MODULEPATH id="juce_events" path="../Juce/modules"/>
+        <MODULEPATH id="juce_graphics" path="../Juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../Juce/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
