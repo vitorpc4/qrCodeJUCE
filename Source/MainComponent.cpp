@@ -7,7 +7,6 @@
 //==============================================================================
 MainComponent::MainComponent()
 {
-    //background = (Drawable::createFromImageData(BinaryData::calculaTest, BinaryData::calculaTestSize));
 
 
 
@@ -27,11 +26,8 @@ void MainComponent::paint (juce::Graphics& g)
     btnGenerate.onClick = [this] { generateQrCode(); };
     
     if (qrCodeGenerated != "") {
-        //background->draw(g, 1.f, AffineTransform());
-        //background->drawAt(g, getWidth()/ 2, getHeight() / 2, 1.f);
         addAndMakeVisible(background.get());
         repaint();
-        //g.drawText(qrCodeGenerated, 20, 40, 200, 40, juce::Justification::centred, true);
     }
 }
 
