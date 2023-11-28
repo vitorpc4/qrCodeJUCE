@@ -7,10 +7,10 @@
 //==============================================================================
 MainComponent::MainComponent()
 {
-
-
+    inputData.setText("Insert data");
 
     setSize (600, 400);
+
 }
 
 MainComponent::~MainComponent()
@@ -22,7 +22,7 @@ void MainComponent::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     addAndMakeVisible(btnGenerate);
-
+    addAndMakeVisible(inputData);
     btnGenerate.onClick = [this] { generateQrCode(); };
     
     if (qrCodeGenerated != "") {
@@ -35,6 +35,7 @@ void MainComponent::resized()
 {
     auto local = getBounds();
     btnGenerate.setBounds(getWidth() - 350, getHeight() - 80, 85, 50);
+    inputData.setBounds(10, 25, 200, 24);
 
     // This is called when the MainComponent is resized.
     // If you add any child components, this is where you should
@@ -43,8 +44,9 @@ void MainComponent::resized()
 
 void MainComponent::generateQrCode()
 {
-    const char* text = "155475987";
-    qrcodegen::QrCode qr0 = qrcodegen::QrCode::encodeText(text, qrcodegen::QrCode::Ecc::LOW);
+    //const char* text = "155475987";
+    auto text = inputData.getTextValue().getValue().toString();
+    qrcodegen::QrCode qr0 = qrcodegen::QrCode::encodeText(text.toRawUTF8(), qrcodegen::QrCode::Ecc::LOW);
     auto svg = toSvgString(qr0, 4);
     auto voidData = svg.c_str();
     auto sizeOfData = sizeof(voidData);

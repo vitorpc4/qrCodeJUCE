@@ -17,12 +17,14 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    TextButton btnGenerate{ "Gera QRCode"};
+    
 
 private:
     //==============================================================================
     // Your private member variables go here...
     std::unique_ptr<Drawable> background;
+    TextEditor inputData;
+    TextButton btnGenerate{ "Gera QRCode" };
     void generateQrCode();
     void printQr(const qrcodegen::QrCode &qr);
     std::string qrCodeGenerated;
