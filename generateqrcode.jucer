@@ -11,6 +11,9 @@
       <FILE id="DzLoBX" name="qrcodegen.h" compile="0" resource="0" file="Source/qrcodegen.h"/>
     </GROUP>
     <GROUP id="{4282CC15-4D03-9C06-41B1-051353026BB3}" name="Source">
+      <FILE id="cyqwFj" name="QrCodeConvert.cpp" compile="1" resource="0"
+            file="Source/QrCodeConvert.cpp"/>
+      <FILE id="c5r6CL" name="QrCodeConvert.h" compile="0" resource="0" file="Source/QrCodeConvert.h"/>
       <FILE id="SO6ttt" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="eotQmW" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="QJ1vXZ" name="MainComponent.cpp" compile="1" resource="0"
