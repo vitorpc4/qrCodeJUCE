@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\qrcodegen.cpp"/>
+    <ClCompile Include="..\..\Source\QrCodeConvert.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\Source\MainComponent.cpp"/>
     <ClCompile Include="..\..\..\Juce\modules\juce_core\containers\juce_AbstractFifo.cpp">
@@ -1369,6 +1370,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\qrcodegen.h"/>
+    <ClInclude Include="..\..\Source\QrCodeConvert.h"/>
     <ClInclude Include="..\..\Source\MainComponent.h"/>
     <ClInclude Include="..\..\..\Juce\modules\juce_core\containers\juce_AbstractFifo.h"/>
     <ClInclude Include="..\..\..\Juce\modules\juce_core\containers\juce_Array.h"/>

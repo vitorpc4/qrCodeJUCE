@@ -2,15 +2,13 @@
 #include <iostream>
 #include <sstream>
 #include "MainComponent.h"
-
+#include "QrCodeConvert.h"
 
 //==============================================================================
 MainComponent::MainComponent()
 {
     inputData.setText("Insert data");
-
     setSize (600, 400);
-
 }
 
 MainComponent::~MainComponent()
@@ -24,11 +22,7 @@ void MainComponent::paint (juce::Graphics& g)
     addAndMakeVisible(btnGenerate);
     addAndMakeVisible(inputData);
     btnGenerate.onClick = [this] { generateQrCode(); };
-    
-    if (qrCodeGenerated != "") {
-        addAndMakeVisible(background.get());
-        repaint();
-    }
+
 }
 
 void MainComponent::resized()
@@ -44,58 +38,19 @@ void MainComponent::resized()
 
 void MainComponent::generateQrCode()
 {
-    //const char* text = "155475987";
-    auto text = inputData.getTextValue().getValue().toString();
-    qrcodegen::QrCode qr0 = qrcodegen::QrCode::encodeText(text.toRawUTF8(), qrcodegen::QrCode::Ecc::LOW);
-    auto svg = toSvgString(qr0, 4);
-    auto voidData = svg.c_str();
-    auto sizeOfData = sizeof(voidData);
-    auto sizeString = svg.size();
+    textData = inputData.getTextValue().getValue().toString();
+    qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(textData.toRawUTF8(), qrcodegen::QrCode::Ecc::LOW);
+    auto stringSvg = QrCodeConvert::toSvgString(qr, 4);
+    auto xml = *parseXML(stringSvg).get();
+    printQr(xml);
+}
 
-    auto xml = *parseXML(svg).get();
-    
+void MainComponent::printQr(juce::XmlElement& xml)
+{
     background = Drawable::createFromSVG(xml);
     Rectangle<int> bounds = getLocalBounds().reduced(100);
     background->setTransformToFit(bounds.toFloat(), RectanglePlacement::onlyIncreaseInSize);
+    addAndMakeVisible(background.get());
+    repaint();
 }
 
-void MainComponent::printQr(const qrcodegen::QrCode& qr)
-{
-    int border = 4;
-    for (int y = -border; y < qr.getSize() + border; y++) {
-        for (int x = -border; x < qr.getSize() + border; x++) {
-            qrCodeGenerated += (qr.getModule(x, y) ? "##" : "  ");
-        }
-        qrCodeGenerated+="\n";
-    }
-    qrCodeGenerated += "\n";
-}
-
-std::string MainComponent::toSvgString(qrcodegen::QrCode& qr, int border)
-{
-    if (border < 0)
-        throw std::domain_error("Border must be non-negative");
-    if (border > INT_MAX / 2 || border * 2 > INT_MAX - qr.getSize())
-        throw std::overflow_error("Border too large");
-
-    std::ostringstream sb;
-    sb << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-    sb << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
-    sb << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 ";
-    sb << (qr.getSize() + border * 2) << " " << (qr.getSize() + border * 2) << "\" stroke=\"none\">\n";
-    sb << "\t<rect width=\"100%\" height=\"100%\" fill=\"#FFFFFF\"/>\n";
-    sb << "\t<path d=\"";
-    for (int y = 0; y < qr.getSize(); y++) {
-        for (int x = 0; x < qr.getSize(); x++) {
-            if (qr.getModule(x, y)) {
-                if (x != 0 || y != 0)
-                    sb << " ";
-                sb << "M" << (x + border) << "," << (y + border) << "h1v1h-1z";
-            }
-        }
-    }
-    sb << "\" fill=\"#000000\"/>\n";
-    sb << "</svg>\n";
-    qrCodeGenerated = "Criado";
-    return sb.str();
-}
