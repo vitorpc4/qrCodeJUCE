@@ -3,9 +3,6 @@
 <JUCERPROJECT id="gOFfAr" name="generateqrcode" projectType="guiapp" useAppConfig="1"
               addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="XeNIOC" name="generateqrcode">
-    <GROUP id="{84073C36-83A8-FF46-58E9-F937484D28EC}" name="Resources">
-      <FILE id="hd3mP3" name="calculaTest" compile="0" resource="1" file="../../Users/vitor/Downloads/calculaTest"/>
-    </GROUP>
     <GROUP id="{7DD1B24B-D2BF-41BA-7245-AB60339A021A}" name="AuxLib">
       <FILE id="HwInnk" name="qrcodegen.cpp" compile="1" resource="0" file="Source/qrcodegen.cpp"/>
       <FILE id="DzLoBX" name="qrcodegen.h" compile="0" resource="0" file="Source/qrcodegen.h"/>
