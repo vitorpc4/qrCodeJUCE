@@ -20,15 +20,17 @@ void MainComponent::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     addAndMakeVisible(btnGenerate);
+    addAndMakeVisible(btnExportSvg);
     addAndMakeVisible(inputData);
     btnGenerate.onClick = [this] { generateQrCode(); };
-
+    btnExportSvg.onClick = [this] { exportFile(); };
 }
 
 void MainComponent::resized()
 {
     auto local = getBounds();
     btnGenerate.setBounds(getWidth() - 350, getHeight() - 80, 85, 50);
+    btnExportSvg.setBounds(getWidth() - 250, getHeight() - 80,85,50);
     inputData.setBounds(10, 25, 200, 24);
 
     // This is called when the MainComponent is resized.
@@ -40,7 +42,7 @@ void MainComponent::generateQrCode()
 {
     textData = inputData.getTextValue().getValue().toString();
     qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(textData.toRawUTF8(), qrcodegen::QrCode::Ecc::LOW);
-    auto stringSvg = QrCodeConvert::toSvgString(qr, 4);
+    stringSvg = QrCodeConvert::toSvgString(qr, 4);
     auto xml = *parseXML(stringSvg).get();
     printQr(xml);
 }
@@ -52,5 +54,10 @@ void MainComponent::printQr(juce::XmlElement& xml)
     background->setTransformToFit(bounds.toFloat(), RectanglePlacement::onlyIncreaseInSize);
     addAndMakeVisible(background.get());
     repaint();
+}
+
+void MainComponent::exportFile()
+{
+    QrCodeConvert::exportFile(stringSvg);
 }
 
