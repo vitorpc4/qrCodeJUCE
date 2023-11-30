@@ -26,7 +26,10 @@ private:
     std::unique_ptr<Drawable> background;
     TextEditor inputData;
     TextButton btnGenerate{ "Gera QRCode" };
+    TextButton btnExportSvg{ "Export SVG" };
     void printQr(juce::XmlElement& xml);
+    void exportFile();
+    std::string stringSvg;
 
     String textData;
 

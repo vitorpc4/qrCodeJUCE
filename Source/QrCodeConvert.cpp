@@ -9,6 +9,7 @@
 */
 #include "QrCodeConvert.h"
 #include <sstream>
+#include <JuceHeader.h>
 
 std::string QrCodeConvert::toSvgString(qrcodegen::QrCode& qr, int border)
 {
@@ -51,4 +52,30 @@ std::string QrCodeConvert::printQr(const qrcodegen::QrCode& qr)
     textData += "\n";
 
     return textData;
+}
+
+void QrCodeConvert::exportFile(const std::string svg)
+{
+    auto initialPath = File::getSpecialLocation(File::hostApplicationPath).getParentDirectory().getFullPathName();
+
+    File resourceFile(initialPath + "\\file.svg");
+   
+    if (resourceFile.exists()) {
+        resourceFile.deleteFile();
+    }
+
+    FileOutputStream output(resourceFile);
+
+    if (!output.openedOk()) {
+        DBG("FileOutputstream didn't open correctly...");
+    }
+
+    output.write(svg.c_str(), svg.size());
+    
+    output.flush();
+
+    if (output.getStatus().failed()) {
+        DBG("Failed in outputstream");
+    }
+
 }

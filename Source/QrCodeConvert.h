@@ -15,4 +15,5 @@
 struct QrCodeConvert {
     static std::string toSvgString(qrcodegen::QrCode& qr, int border);
     static std::string printQr(const qrcodegen::QrCode& qr);
+    static void exportFile(const std::string);
 };
